@@ -4,21 +4,28 @@ import SidebarChat from './SidebarChat';
 import db from '../firebase'
 // import { useStateValue } from '../StateProvider';
 import Rooms from '../mockdata/rooms.json';
+import { useCollectionData } from 'react-firebase-hooks/firestore';
 
 function Sidebar() {
     const [ rooms, setRooms ] = useState([]);
     // const [{user, dispacth}] = useStateValue();
-    useEffect(() => {
-        db.collection('rooms').onSnapshot(snapshot => 
-        setRooms(
-            snapshot.docs.map(doc => ({
-                id: doc.id,
-                data: doc.data(),
-            }))
-           )
-        );
+    // useEffect(() => {
+    //     db.collection('rooms').onSnapshot(snapshot => 
+    //     setRooms(
+    //         snapshot.docs.map(doc => ({
+    //             id: doc.id,
+    //             data: doc.data(),
+    //         }))
+    //        )
+    //     );
 
-    }, []);
+    // }, []);
+
+    const roomies = db.collection("rooms");
+    const [roomData]=useCollectionData(roomies, {idField: 'id'});
+
+    //console.log(roomies);
+    //console.log("Room data", roomData);
 
     return(
         <div className="sidebar">
@@ -30,9 +37,9 @@ function Sidebar() {
          <div className="sidebar_chats">
              
              {
-                 rooms.map(room => (
-                     <SidebarChat key={room.id} id={room.id} name={room.data.title} />
-                 ))
+                 roomData ? roomData.map(room => (
+                     <SidebarChat key={room.id} id={room.id} name={room.title} />
+                 )):<></>
              }
              {/* {
                  Rooms.map((roomSingle) => {

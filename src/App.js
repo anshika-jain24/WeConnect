@@ -1,9 +1,11 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './App.css';
 import Login from './components/Login'
 import Sidebar from './components/Sidebar';
-import Chat from './components/Chat';
+import Chat from './components/MainChat';
 import { BrowserRouter as Router , Route, Switch} from 'react-router-dom';
+import db from './firebase';
+// import {useState} from 'react-hooks';
 import {useStateValue} from "./StateProvider"
 
 // import firebase from 'firebase/app';
@@ -11,8 +13,9 @@ import {useStateValue} from "./StateProvider"
 // import 'firebase/auth';
 
 import { useAuthState } from 'react-firebase-hooks/auth';
-// import { useCollectionData } from 'react-firebase-hooks/firestore';
+import { useCollectionData } from 'react-firebase-hooks/firestore';
 import firebase from 'firebase'
+// import { NAME, UID, usersData } from './components/UTILS';
 
 // const firebaseConfig = {
 //     apiKey: "AIzaSyDwG9zCaY_t3H8oBnmLdnro24FOfK2tBf0",
@@ -30,13 +33,15 @@ import firebase from 'firebase'
 const auth = firebase.auth();
 const firestore = firebase.firestore();
 
+var NAME = "";
+
 function App() {
 
   // const [{user},dispatch] = useStateValue();
   
 
   const [user] = useAuthState(auth);
-  console.log(user);
+  // console.log("USER: ", use);
 
   return(
     <section>
@@ -49,11 +54,11 @@ function App() {
         <Sidebar />
         <Switch>
            <Route path="/rooms/:roomId">
-             < Chat />
+             < Chat name={NAME} />
           </Route>
 
           <Route path="/">
-            <Chat />
+            <Chat name={NAME} />
           </Route>
         </Switch>
         
@@ -95,14 +100,14 @@ function App() {
 //   admin.auth().getUser(creds)
 //   .then((userRecord) => {
 //     // See the UserRecord reference doc for the contents of userRecord.
-//     console.log(`Successfully fetched user data: ${userRecord.toJSON()}`);
+//     //console.log(`Successfully fetched user data: ${userRecord.toJSON()}`);
 //   })
 //   .catch((error) => {
-//     console.log('Error fetching user data:', error);
+//     //console.log('Error fetching user data:', error);
 //   });
 
-//   console.log(creds);
-//   console.log("IU:", user);
+//   //console.log(creds);
+//   //console.log("IU:", user);
 
 //   return (
 //     <div className="app">
@@ -131,12 +136,61 @@ function App() {
 // }
 
 function SignIn() {
-
-  console.log("chal jaaa");
+  //console.log("chal jaaa");
+const [use, setUse] = useState();
   const signInWithGoogle = () => {
     const provider = new firebase.auth.GoogleAuthProvider();
-    auth.signInWithPopup(provider);
+    auth.signInWithPopup(provider) .then(result=>{
+      console.log("R: ", result.user);
+      setUse(result.user);
+      // window.location.href="/";
+  })
+  .catch((err)=>alert(err.message));
+}
+
+    auth.onAuthStateChanged(userAuth => {
+        setUse(userAuth);
+    });
+    const userscoll = db.collection("users");
+    const [rrrr]= useCollectionData(userscoll, { idField: 'id' });
+  
+  if(use){
+    let userData = use;
+    const USERID=use.uid;
+    if(userData.metadata.creationTime === userData.metadata.lastSignInTime){
+      console.log("user for the first time")
+      db.collection("users").doc(`${USERID}`).set({
+        name: use.displayName,
+        rooms: [],
+  })
+  .then(() => {
+      //console.log("New Room Created!");
+    console.log("Users collection 1", rrrr);
+  })
+  .catch((error) => {
+      console.error("Error writing document: ", error);
+  });
+    // store it in UTILS  
+  }else{
+    console.log("user already present")
+    // const userscoll = db.collection("users");
+    console.log("Users collection", rrrr);
+    // store it in UTILS
+  }}
+
+  // console.log("UID: ", use);
+
+
+  if(use){
+  console.log("UIDDDD: ", use.displayName);
+  NAME = use.displayName;
+  // UID=use.uid;
+  console.log("Mera nassme haio", NAME);
   }
+  else{
+    console.log("no user");
+  }
+
 
   return (
     <>
@@ -147,7 +201,7 @@ function SignIn() {
 }
 
 // function ChatR(){
-//   console.log("roomieeee");
+//   //console.log("roomieeee");
 //   return (
 //     <h1>HOLA!</h1>
 //   )

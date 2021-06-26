@@ -12,10 +12,10 @@
 // }
 
 // const reducer = (state, action) => {
-//     console.log(action);
+//     //console.log(action);
 //     switch(action.type){
 //         case actionTypes.SET_USER:
-//            console.log(":CFGHftr", action.user);
+//            //console.log(":CFGHftr", action.user);
 //             return {
 //                 ...state,
 //                 user:action.user
@@ -24,7 +24,7 @@
 //             localStorage.setItem('uid',action.uid);
 //             localStorage.setItem('displayName',action.displayName);
 //             localStorage.setItem('photoURL',action.photoURL);
-//             console.log('session added to storage');
+//             //console.log('session added to storage');
 //            return {
 //                ...state,
 //                uid:action.uid,

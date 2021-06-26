@@ -7,22 +7,12 @@ import {actionTypes} from '../reducer'
 
 function Login() {
 
-    const [{}, dispatch]= useStateValue();
+    // const [{}, dispatch]= useStateValue();
 
     const signIn=()=>{
         auth.signInWithPopup(provider)
         .then(result=>{
-            console.log(result.user);
-            dispatch({
-                type:actionTypes.SET_USER,
-                user:result.user,
-            });
-            dispatch({
-                type:actionTypes.SET_SESSION,
-                uid:result.user.uid,
-                displayName:result.user.displayName,
-                photoURL:result.user.photoURL
-            })
+            //console.log(result.user);
             window.location.href="/";
         })
         .catch((err)=>alert(err.message));

@@ -61,6 +61,7 @@
     width: fit-content;
     font-size: 16px;
     padding: 10px;
+    right: 0;
 }
 
 .chat_receiver{

@@ -1,37 +1,40 @@
 import React, { useState, useEffect } from 'react';
 import { Avatar, IconButton } from "@material-ui/core";
-import "./Chat.css";
+import "./MainChat.css";
 import { AttachFile, SearchOutlined } from '@material-ui/icons';
 import VideocamRoundedIcon from '@material-ui/icons/VideocamRounded';
 import PhoneRoundedIcon from '@material-ui/icons/PhoneRounded';
 import Button from '@material-ui/core/Button';
 // import {useParams} from 'react-router-dom';
 import db from '../firebase';
-import { useCollectionData } from 'react-firebase-hooks/firestore';
+import { useCollectionData, useDocumentData } from 'react-firebase-hooks/firestore';
 import firebase from "firebase";
 // import { useStateValue } from '../StateProvider';
 
-// BURGERS ORDER KRRE HUE HAI, UNKA WAIT KRRA, USKE BAAD HOPEFULLY!!!! 
 
-function Chat() {
+const ROOMID = "AnshikaKaRoom";
+
+function Chat({name}) {
     const [input, setInput]=useState("");
     const [seed, setSeed] = useState('');
     // const { roomId } = useParams();
     const [roomName, setRoomName] =useState("");
-    const userName1 = "Ansj";   
+    const userName1 = name;  
     const [messages, setMessages]= useState([]);
+
+    console.log("NAAM", name);
 
     function AddToFirebase(e) {
         e.preventDefault();
-        console.log("CALLED ADDTOFIREBASE!");
+        //console.log("CALLED ADDTOFIREBASE!");
 
-        db.collection("rooms").doc(`hYPogJ5mDjZrLj5GD0cw`).collection("messages").add({
+        db.collection("rooms").doc(`${ROOMID}`).collection("messages").add({
             time: firebase.firestore.FieldValue.serverTimestamp(),
             text: input,
             sender: userName1
         })
         .then(() => {
-            console.log(`Message written inside Room Number:  successfully written!`);
+            //console.log(`Message written inside Room Number:  successfully written!`);
         })
         .catch((error) => {
             console.error("Error writing document: ", error);
@@ -42,19 +45,57 @@ function Chat() {
 
     /// GET MESSAGES FROM A ROOM
     const roomies = db.collection("rooms")
-    const roomsRef = roomies.doc(`hYPogJ5mDjZrLj5GD0cw`)
+    const roomsRef = roomies.doc(`${ROOMID}`)
     const messagesRef = roomsRef.collection("messages");
     const query = messagesRef.orderBy('time',"asc");
     const [messag] = useCollectionData(query, { idField: 'id' });
     const [rrrr] = useCollectionData(roomies, { idField: 'id' });
 
+    // const viewss = db.collection("views");
+    // const videoView=viewss.doc('VideoCall');
+    // const t=useDocumentData(videoView, { idField: 'id' });
+    // // const videoView = videoRoom.doc(`VideoCall`);
+    // // const videoData=useCollectionData(videoRoom, {idField: 'id'});
+    // // const chatRoom = db.collection("views")
+    // // const chatView = videoRoom.doc(`ChatWindow`);
+
+    // console.log("Video", videoView.data());
+    // // console.log("Chatview", chatView);
+
+    // var docRef = db.collection("Views").doc("VideoCall");
+    // const [videodata,setVideoData] = useState();
+
+    // docRef.get().then((doc) => {
+    //     if (doc.exists) {
+    //         // console.log("Document data:", doc.data());
+    //         setVideoData(doc.data());
+    //     } else {
+    //         // doc.data() will be undefined in this case
+    //         console.log("No such document!");
+    //     }
+    // }).catch((error) => {
+    //     console.log("Error getting document:", error);
+    // });
+
+    var citiesRef = db.collection("Views");
+
+    const toggleView = (e) => {
+
+        citiesRef.doc("VideoCall").set({
+            open: true
+        });
+
+        // window.location.reload();
+
+    }
+
 
     useEffect(() => {
         roomsRef.get().then((snap) => {console.log("S:",snap.data());});
-    }, [roomsRef])
+    }, [roomsRef]);
     
-    console.log(rrrr);
-    console.log(messag);
+    //console.log(rrrr);
+    //console.log(messag);
 
     // let el = null;
     // if (messag) {
@@ -83,7 +124,7 @@ function Chat() {
 
     // // const [ { user }, dispatch ] =useStateValue();
 
-    // // console.log("UUU", user);
+    // // //console.log("UUU", user);
 
     // const logOut = (e) => {
     //     e.preventDefault();
@@ -100,8 +141,8 @@ function Chat() {
     //          setMessages(snapshot.docs.map((doc) => doc.data())))
     //      );
     //  }
-    //  console.log(messages)
-    // //  console.log(db.collection('rooms').doc(roomId).collection("messages"));
+    //  //console.log(messages)
+    // //  //console.log(db.collection('rooms').doc(roomId).collection("messages"));
     // }, [roomId]);
 
     // useEffect( () => {
@@ -110,7 +151,7 @@ function Chat() {
 
     // const sendMessage= (e) => {
     //     e.preventDefault();
-    //     console.log("You typed >>>", input);
+    //     //console.log("You typed >>>", input);
     //     db.collection('rooms').doc(roomId).collection('messages').add({
     //        message: input,
     //         name: user.displayName,
@@ -121,7 +162,8 @@ function Chat() {
     // };
 
     return (
-        <div className="chat">
+        <>
+        {citiesRef ? <div className="chat">
             <div className="chat_header">
                 <Avatar src={`https://avatars.dicebear.com/api/human/${seed}.svg`} />
     
@@ -133,19 +175,19 @@ function Chat() {
                     </p>
             </div>
                 <div className="chat_headerRight">
-                    <VideocamRoundedIcon />
+                    <VideocamRoundedIcon onClick={toggleView}/>
                     <PhoneRoundedIcon />
                     {/* <Button onClick={logOut}>Logout</Button> */}
                 </div>
             </div>
             <div className="chat_body">
-                {/* {messages.map((message) => (
-                 <p className={`chat_message ${message.name === user.displayName && `chat_receiver`}`}>
-                    <span className="chat_name">{message.name}</span>{message.message}
-                    <span className="chat_timestamp">{new Date(message.timestamp?.toDate
+                {messag ? messag.map((message) => (
+                 <p className={`chat_message ${message.sender === userName1 && `chat_receiver`}`}>
+                    <span className="chat_name">{message.sender}</span>{message.text}
+                    <span className="chat_timestamp">{new Date(message.time?.toDate
                     ()).toUTCString()}</span>
                 </p>
-                ))} */}
+                )):<></>}
             
             </div>
             <div className="chat_footer">
@@ -154,7 +196,8 @@ function Chat() {
                   <Button onClick={AddToFirebase} type="submit" disabled={input.length<1}>Send</Button>
               </form>
             </div>
-        </div>
+        </div>:<></>}
+        </>
     )
 }
 
