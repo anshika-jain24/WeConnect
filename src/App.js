@@ -53,9 +53,9 @@ function App() {
       <Router>
         <Sidebar />
         <Switch>
-           <Route path="/rooms/:roomId">
-             < Chat name={NAME} />
-          </Route>
+           {/* <Route path="/rooms/:roomId">
+             <Chat name={NAME} />
+          </Route> */}
 
           <Route path="/">
             <Chat name={NAME} />

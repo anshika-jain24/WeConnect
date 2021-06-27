@@ -1,14 +1,17 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState, useCallback, useContext } from 'react';
 import Call from '../Call/Call';
 import StartButton from '../StartButton/StartButton';
 import api from '../../api';
-import './App.css';
+import './CallApp.css';
 import Tray from '../Tray/Tray';
 import CallObjectContext from '../../CallObjectContext';
 import { roomUrlFromPageUrl, pageUrlFromRoomUrl } from '../../urlUtils';
 import DailyIframe from '@daily-co/daily-js';
 import { logDailyEvent } from '../../logUtils';
 import db from '../../firebase';
+import { StateContext } from '../../StateProvider';
+// import Chat from '../MainChat';
+// import Button from '@material-ui/core/Button';
 
 const STATE_IDLE = 'STATE_IDLE';
 const STATE_CREATING = 'STATE_CREATING';
@@ -17,10 +20,13 @@ const STATE_JOINED = 'STATE_JOINED';
 const STATE_LEAVING = 'STATE_LEAVING';
 const STATE_ERROR = 'STATE_ERROR';
 
-export default function CallApp() {
+function CallApp() {
+  console.log("OLA");
   const [appState, setAppState] = useState(STATE_IDLE);
   const [roomUrl, setRoomUrl] = useState(null);
   const [callObject, setCallObject] = useState(null);
+
+  const {video, toggleVideo} = useContext(StateContext);
 
   /**
    * Creates a new call room.
@@ -73,9 +79,10 @@ export default function CallApp() {
       });
     } else {
       setAppState(STATE_LEAVING);
-      citiesRef.doc("VideoCall").set({
-        open: false
-    });
+    //   citiesRef.doc("VideoCall").set({
+    //     open: false
+    // });
+      toggleVideo();
       callObject.leave();
     }
 
@@ -232,13 +239,19 @@ export default function CallApp() {
           />
         </CallObjectContext.Provider>
       ) : (
+        <>
         <StartButton
           disabled={!enableStartButton}
           onClick={() => {
             createCall().then((url) => startJoiningCall(url));
           }}
         />
+        {/* <Button onClick={Chat}>Go to Chat</Button> */}
+        </>
       )}
     </div>
   );
 }
+
+
+export default CallApp;

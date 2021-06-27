@@ -1,16 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import CallApp from '../src/components/App/App';
+import CallApp from './components/CallApp/CallApp';
 import App from './App';
-import MainApp from './MainApp';
+import MainMainApp from './MainMainApp';
 import * as serviceWorker from './serviceWorker';
-import {StateProvider} from './StateProvider';
-import initialState from "./reducer";
-import reducer from "./reducer";
+
 ReactDOM.render(
   <React.StrictMode>
-    <MainApp />
+    <MainMainApp />
   </React.StrictMode>,
   document.getElementById('root')
 );

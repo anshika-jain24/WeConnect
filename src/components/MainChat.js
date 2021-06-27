@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Avatar, IconButton } from "@material-ui/core";
 import "./MainChat.css";
-import { AttachFile, SearchOutlined } from '@material-ui/icons';
+import { AttachFile, Call, SearchOutlined } from '@material-ui/icons';
 import VideocamRoundedIcon from '@material-ui/icons/VideocamRounded';
 import PhoneRoundedIcon from '@material-ui/icons/PhoneRounded';
 import Button from '@material-ui/core/Button';
@@ -9,8 +9,10 @@ import Button from '@material-ui/core/Button';
 import db from '../firebase';
 import { useCollectionData, useDocumentData } from 'react-firebase-hooks/firestore';
 import firebase from "firebase";
+// import CallApp from './App/App';
+import {userName} from './UTILS';
 // import { useStateValue } from '../StateProvider';
-
+import { StateContext } from '../StateProvider';
 
 const ROOMID = "AnshikaKaRoom";
 
@@ -22,7 +24,13 @@ function Chat({name}) {
     const userName1 = name;  
     const [messages, setMessages]= useState([]);
 
-    console.log("NAAM", name);
+    const {video, toggleVideo} = useContext(StateContext);
+
+    console.log("chatvideo" + video);
+
+    var i = 1;
+    console.log("NAAM", name, userName);
+
 
     function AddToFirebase(e) {
         e.preventDefault();
@@ -90,9 +98,9 @@ function Chat({name}) {
     }
 
 
-    useEffect(() => {
-        roomsRef.get().then((snap) => {console.log("S:",snap.data());});
-    }, [roomsRef]);
+    // useEffect(() => {
+    //     roomsRef.get().then((snap) => {console.log("S:",snap.data());});
+    // }, [roomsRef]);
     
     //console.log(rrrr);
     //console.log(messag);
@@ -175,7 +183,7 @@ function Chat({name}) {
                     </p>
             </div>
                 <div className="chat_headerRight">
-                    <VideocamRoundedIcon onClick={toggleView}/>
+                    <VideocamRoundedIcon onClick={toggleVideo}/>
                     <PhoneRoundedIcon />
                     {/* <Button onClick={logOut}>Logout</Button> */}
                 </div>
