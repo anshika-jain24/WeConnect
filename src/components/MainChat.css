@@ -53,7 +53,7 @@
     background-color: #c0b5c7;
     border-radius: 40px;
     margin-bottom: 30px; */
-    position: relative;
+    /* position: relative;
     background: #0048AA;
     color: #FFF;
     border: 1px solid #0048AA;
@@ -61,14 +61,25 @@
     width: fit-content;
     font-size: 16px;
     padding: 10px;
-    right: 0;
+    right: 0; */
+    position: relative;
+    font-size: 16px;
+    padding: 10px;
+    background-color: #EEE;
+    border-radius: 40px;
+    width: fit-content;
+    margin-bottom: 20px;
+    border: 1px solid #cccccc;
+    border-radius: 14px 14px 14px 0;
 }
 
 .chat_receiver{
-    background: #EEE;
-    color: #111;
-    border: 1px solid #cccccc;
-    border-radius: 14px 14px 14px 0;
+    /* background: #EEE; */
+    color: white;
+    border: 1px solid #0048AA;
+    border-radius: 14px 14px 0 14px;
+    margin-left: auto;
+    background-color: #0048AA;
 }
 
 .chat_name{

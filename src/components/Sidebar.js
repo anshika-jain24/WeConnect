@@ -38,6 +38,7 @@ function Sidebar() {
              
              {
                  roomData ? roomData.map(room => (
+                    //  if(room.id is present in user ka rooms ka array)
                      <SidebarChat key={room.id} id={room.id} name={room.title} />
                  )):<></>
              }

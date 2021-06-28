@@ -5,7 +5,7 @@ import { AttachFile, Call, SearchOutlined } from '@material-ui/icons';
 import VideocamRoundedIcon from '@material-ui/icons/VideocamRounded';
 import PhoneRoundedIcon from '@material-ui/icons/PhoneRounded';
 import Button from '@material-ui/core/Button';
-// import {useParams} from 'react-router-dom';
+import {useParams} from 'react-router-dom';
 import db from '../firebase';
 import { useCollectionData, useDocumentData } from 'react-firebase-hooks/firestore';
 import firebase from "firebase";
@@ -14,12 +14,13 @@ import {userName} from './UTILS';
 // import { useStateValue } from '../StateProvider';
 import { StateContext } from '../StateProvider';
 
-const ROOMID = "AnshikaKaRoom";
+// const ROOMID = "AnshikaKaRoom";
 
 function Chat({name}) {
     const [input, setInput]=useState("");
     const [seed, setSeed] = useState('');
-    // const { roomId } = useParams();
+    const { roomId } = useParams();
+    // props / URL 
     const [roomName, setRoomName] =useState("");
     const userName1 = name;  
     const [messages, setMessages]= useState([]);
@@ -27,6 +28,8 @@ function Chat({name}) {
     const {video, toggleVideo} = useContext(StateContext);
 
     console.log("chatvideo" + video);
+
+    console.log("RoomID", roomId);
 
     var i = 1;
     console.log("NAAM", name, userName);
@@ -36,7 +39,7 @@ function Chat({name}) {
         e.preventDefault();
         //console.log("CALLED ADDTOFIREBASE!");
 
-        db.collection("rooms").doc(`${ROOMID}`).collection("messages").add({
+        db.collection("rooms").doc(`${roomId}`).collection("messages").add({
             time: firebase.firestore.FieldValue.serverTimestamp(),
             text: input,
             sender: userName1
@@ -49,86 +52,96 @@ function Chat({name}) {
         });
         setInput("");
     };
-
-
-    /// GET MESSAGES FROM A ROOM
     const roomies = db.collection("rooms")
-    const roomsRef = roomies.doc(`${ROOMID}`)
+    const [rrrr] = useCollectionData(roomies, { idField: 'id' });
+    // var arr = [];
+    // if(rrrr){rrrr.forEach(function(item){
+    //     // item.id -> room ids
+    //     arr.append(item.id);
+    // })}
+
+    
+    // const roomsRefs = roomies.doc(`${item.id}`)
+    // const messagesRefs = roomsRefs.collection("messages");
+    // const querys = messagesRefs.orderBy('time',"asc");
+    // const [messags] = useCollectionData(querys, { idField: 'id' });
+    // console.log(messags);
+
+    //
+    /// GET MESSAGES FROM A ROOM
+    const roomsRef = roomies.doc(`${roomId}`)
     const messagesRef = roomsRef.collection("messages");
     const query = messagesRef.orderBy('time',"asc");
     const [messag] = useCollectionData(query, { idField: 'id' });
-    const [rrrr] = useCollectionData(roomies, { idField: 'id' });
 
-    // const viewss = db.collection("views");
-    // const videoView=viewss.doc('VideoCall');
-    // const t=useDocumentData(videoView, { idField: 'id' });
-    // // const videoView = videoRoom.doc(`VideoCall`);
-    // // const videoData=useCollectionData(videoRoom, {idField: 'id'});
-    // // const chatRoom = db.collection("views")
-    // // const chatView = videoRoom.doc(`ChatWindow`);
+    // const [roomi] = useCollectionData(roomsRef, {id: 'id'});
+    console.log("rrr", messag);
+    const userscoll = db.collection("users");
+    const [uuuu]= useCollectionData(userscoll, { idField: 'id' });
 
-    // console.log("Video", videoView.data());
-    // // console.log("Chatview", chatView);
+    console.log("uuu", uuuu);
+    console.log("RoomsRef", roomsRef);
 
-    // var docRef = db.collection("Views").doc("VideoCall");
-    // const [videodata,setVideoData] = useState();
 
-    // docRef.get().then((doc) => {
-    //     if (doc.exists) {
-    //         // console.log("Document data:", doc.data());
-    //         setVideoData(doc.data());
-    //     } else {
-    //         // doc.data() will be undefined in this case
-    //         console.log("No such document!");
-    //     }
-    // }).catch((error) => {
-    //     console.log("Error getting document:", error);
-    // });
+    if(uuuu){uuuu.forEach(function(item){
+        console.log("KK:", item.name);
+
+        // {item.rooms.map((r) => {
+        //     return (
+        //     <div className={styles.card}>
+        //          <Card 
+        //             onClick={() => props.history.push(`/liveChat/${r}`)} link => /:roomID 
+        //             className={styles.cardbody}>
+        //             <div className={styles.cardHead}>
+        //                 <h2>Room Number: <span className={styles.roomNum}>{r}</span></h2>
+        //             </div>
+        //         </Card>
+        //     </div>
+        // )})}
+        item.rooms.forEach(function(it){
+            console.log("->", it);
+        })
+    })}
+  
+    // uuser.roooms
+    // arr = []
+
+
+    // ROOMS -> ROOMIDS ; USER KE ROOMS KE ARRAY SE
+
+
 
     var citiesRef = db.collection("Views");
 
-    const toggleView = (e) => {
+    // const toggleView = (e) => {
 
-        citiesRef.doc("VideoCall").set({
-            open: true
-        });
+    //     citiesRef.doc("VideoCall").set({
+    //         open: true
+    //     });
 
-        // window.location.reload();
+    //     // window.location.reload();
 
-    }
+    // }
+
+    var docRef = db.collection("rooms").doc(`${roomId}`);
+
+    docRef.get().then((doc) => {
+        if (doc.exists) {
+            console.log("Document data:", doc.data());
+            setRoomName(doc.data().title);
+        } else {
+            // doc.data() will be undefined in this case
+            console.log("No such document!");
+        }
+    }).catch((error) => {
+        console.log("Error getting document:", error);
+    });
 
 
     // useEffect(() => {
     //     roomsRef.get().then((snap) => {console.log("S:",snap.data());});
     // }, [roomsRef]);
-    
-    //console.log(rrrr);
-    //console.log(messag);
-
-    // let el = null;
-    // if (messag) {
-    //     el = <div className={styles.ell}>
-    //             {messag.map((m) => {return(
-    //                 <div className={styles.messageRoom}>
-    //                     <div className={styles.chas}>
-    //                     <div className={styles.messagesDiv}>
-    //                         <div className={styles.messages}>
-    //                             <p className={m.user === userName1 ? styles.sender : styles.reciever}>{m.txt}</p>
-    //                             {/* <p className={styles.timesptamp}>{Date(m.time)}</p> */}
-    //                         </div>
-    //                     </div>
-    //                     </div>
-    //                 </div>
-    //                 )})}
-    //         </div>
-    // }
-
-
-
-
-
-
-
+ 
 
     // // const [ { user }, dispatch ] =useStateValue();
 
@@ -177,10 +190,10 @@ function Chat({name}) {
     
             <div className="chat_headerInfo">
                 <h3>{roomName}</h3>
-                <p>Last seen{" "}
+                {/* <p>Last seen{" "}
                 {new Date(
                     messages[messages.length-1]?.timestamp?.toDate()).toUTCString()}
-                    </p>
+                    </p> */}
             </div>
                 <div className="chat_headerRight">
                     <VideocamRoundedIcon onClick={toggleVideo}/>
@@ -207,6 +220,7 @@ function Chat({name}) {
         </div>:<></>}
         </>
     )
+//
 }
 
 export default Chat;

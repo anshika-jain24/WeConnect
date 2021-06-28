@@ -66,7 +66,7 @@ function CallApp() {
    * 
    */
 
-   var citiesRef = db.collection("Views");
+  //  var citiesRef = db.collection("Views");
 
   const startLeavingCall = useCallback(() => {
     if (!callObject) return;

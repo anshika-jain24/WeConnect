@@ -21,8 +21,10 @@ function SidebarChat({addNewChat, id , name}) {
     //         //console.log(doc.id, " => ", doc.data());
     //     });
     // });
-    const userName1= "Ansj";
-    const roomsRef = db.collection("rooms").doc(`hYPogJ5mDjZrLj5GD0cw`);
+    // const userName1= "Ansj";
+
+    // console.log("id", id);
+    const roomsRef = db.collection("rooms").doc(`${id}`);
     const messagesRef = roomsRef.collection("messages");
     const query = messagesRef.orderBy('time',"desc");
     const [messag] = useCollectionData(query, { idField: 'id' });

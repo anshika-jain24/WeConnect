@@ -13,13 +13,15 @@ function AddRoom() {
         //console.log("CALLED ADD_ROOM_TO_FIREBASE!");
 
         // var SOS_ID = Math.floor(100000 + Math.random() * 900000);
+        const roomName= prompt("Please enter name for chat");
+        console.log("roomName", roomName);
         const responser = "u2";
         const sender = "u3";
         const users = [`${responser}`, `${sender}`];
 
-        db.collection("rooms").doc(`${ROOMID}`).set({
+        db.collection("rooms").add({
             time: firebase.firestore.FieldValue.serverTimestamp(),
-            title: ROOMID,
+            title: roomName,
             users: users,
         })
         .then(() => {

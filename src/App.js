@@ -53,9 +53,9 @@ function App() {
       <Router>
         <Sidebar />
         <Switch>
-           {/* <Route path="/rooms/:roomId">
+           <Route path="/rooms/:roomId">
              <Chat name={NAME} />
-          </Route> */}
+          </Route>
 
           <Route path="/">
             <Chat name={NAME} />
@@ -152,8 +152,14 @@ const [use, setUse] = useState();
         setUse(userAuth);
     });
     const userscoll = db.collection("users");
-    const [rrrr]= useCollectionData(userscoll, { idField: 'id' });
+    const [uuuu]= useCollectionData(userscoll, { idField: 'id' });
+
+    console.log("uuu", uuuu);
   
+    // await function
+    // await GET call
+    // then context 
+
   if(use){
     let userData = use;
     const USERID=use.uid;
@@ -165,7 +171,7 @@ const [use, setUse] = useState();
   })
   .then(() => {
       //console.log("New Room Created!");
-    console.log("Users collection 1", rrrr);
+    console.log("Users collection 1", uuuu);
   })
   .catch((error) => {
       console.error("Error writing document: ", error);
@@ -174,7 +180,8 @@ const [use, setUse] = useState();
   }else{
     console.log("user already present")
     // const userscoll = db.collection("users");
-    console.log("Users collection", rrrr);
+    console.log("Users collection", uuuu);
+    // pass name / id 
     // store it in UTILS
   }}
 

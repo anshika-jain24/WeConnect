@@ -10,7 +10,7 @@ export const StateProvider =(props)=>{
         console.log("clickkkkk");
         setVideo(!video);
     }
-
+    
     return(
     <StateContext.Provider value={{video, toggleVideo}}>
         {props.children}
