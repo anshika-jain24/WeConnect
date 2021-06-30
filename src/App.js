@@ -5,8 +5,6 @@ import Sidebar from './components/Sidebar';
 import Chat from './components/MainChat';
 import { BrowserRouter as Router , Route, Switch} from 'react-router-dom';
 import db from './firebase';
-// import {useState} from 'react-hooks';
-import {useStateValue} from "./StateProvider"
 
 // import firebase from 'firebase/app';
 // import 'firebase/firestore';

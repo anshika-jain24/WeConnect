@@ -10,6 +10,7 @@ import DailyIframe from '@daily-co/daily-js';
 import { logDailyEvent } from '../../logUtils';
 import db from '../../firebase';
 import { StateContext } from '../../StateProvider';
+import { TextField } from '@material-ui/core';
 // import Chat from '../MainChat';
 // import Button from '@material-ui/core/Button';
 
@@ -20,10 +21,15 @@ const STATE_JOINED = 'STATE_JOINED';
 const STATE_LEAVING = 'STATE_LEAVING';
 const STATE_ERROR = 'STATE_ERROR';
 
-function CallApp() {
+function CallApp(props) {
   console.log("OLA");
   const [appState, setAppState] = useState(STATE_IDLE);
   const [roomUrl, setRoomUrl] = useState(null);
+  const [name,setName] = useState("");
+
+  const handleName = (e) => {
+    setName(e.target.value);
+  }
   const [callObject, setCallObject] = useState(null);
 
   const {video, toggleVideo} = useContext(StateContext);
@@ -31,10 +37,11 @@ function CallApp() {
   /**
    * Creates a new call room.
    */
-  const createCall = useCallback(() => {
+  const createCall = useCallback((name) => {
     setAppState(STATE_CREATING);
+    console.log(name);
     return api
-      .createRoom()
+      .createRoom(name)
       .then((room) => room.url)
       .catch((error) => {
         console.log('Error creating room', error);
@@ -172,6 +179,16 @@ function CallApp() {
   /**
    * Listen for app messages from other call participants.
    */
+
+  useEffect(() => {
+    if(props.dbRoomUrl)
+    {
+      const pageUrl = pageUrlFromRoomUrl(props.dbRoomUrl);
+      if (pageUrl === window.location.href) return;
+      window.history.replaceState(null, null, pageUrl);
+    }
+  }, [])
+
   useEffect(() => {
     if (!callObject) {
       return;
@@ -224,6 +241,8 @@ function CallApp() {
    */
   const enableStartButton = appState === STATE_IDLE;
 
+  
+
   return (
     <div className="videoapp">
       {showCall ? (
@@ -240,10 +259,11 @@ function CallApp() {
         </CallObjectContext.Provider>
       ) : (
         <>
+        <TextField onChange={handleName} value={name}></TextField>
         <StartButton
           disabled={!enableStartButton}
           onClick={() => {
-            createCall().then((url) => startJoiningCall(url));
+            createCall(name).then((url) => startJoiningCall(url));
           }}
         />
         {/* <Button onClick={Chat}>Go to Chat</Button> */}

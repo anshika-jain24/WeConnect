@@ -23,7 +23,7 @@ function SidebarChat({addNewChat, id , name}) {
     // });
     // const userName1= "Ansj";
 
-    // console.log("id", id);
+    console.log("id", id);
     const roomsRef = db.collection("rooms").doc(`${id}`);
     const messagesRef = roomsRef.collection("messages");
     const query = messagesRef.orderBy('time',"desc");

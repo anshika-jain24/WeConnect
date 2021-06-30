@@ -83,45 +83,26 @@ function Chat({name}) {
     console.log("RoomsRef", roomsRef);
 
 
-    if(uuuu){uuuu.forEach(function(item){
-        console.log("KK:", item.name);
+    // if(uuuu){uuuu.forEach(function(item){
+    //     console.log("KK:", item.name);
 
-        // {item.rooms.map((r) => {
-        //     return (
-        //     <div className={styles.card}>
-        //          <Card 
-        //             onClick={() => props.history.push(`/liveChat/${r}`)} link => /:roomID 
-        //             className={styles.cardbody}>
-        //             <div className={styles.cardHead}>
-        //                 <h2>Room Number: <span className={styles.roomNum}>{r}</span></h2>
-        //             </div>
-        //         </Card>
-        //     </div>
-        // )})}
-        item.rooms.forEach(function(it){
-            console.log("->", it);
-        })
-    })}
-  
-    // uuser.roooms
-    // arr = []
+    //     // {item.rooms.map((r) => {
+    //     //     return (
+    //     //     <div className={styles.card}>
+    //     //          <Card 
+    //     //             onClick={() => props.history.push(`/liveChat/${r}`)} link => /:roomID 
+    //     //             className={styles.cardbody}>
+    //     //             <div className={styles.cardHead}>
+    //     //                 <h2>Room Number: <span className={styles.roomNum}>{r}</span></h2>
+    //     //             </div>
+    //     //         </Card>
+    //     //     </div>
+    //     // )})}
+    //     item.rooms.forEach(function(it){
+    //         console.log("->", it);
+    //     })
+    // })}
 
-
-    // ROOMS -> ROOMIDS ; USER KE ROOMS KE ARRAY SE
-
-
-
-    var citiesRef = db.collection("Views");
-
-    // const toggleView = (e) => {
-
-    //     citiesRef.doc("VideoCall").set({
-    //         open: true
-    //     });
-
-    //     // window.location.reload();
-
-    // }
 
     var docRef = db.collection("rooms").doc(`${roomId}`);
 
@@ -143,48 +124,10 @@ function Chat({name}) {
     // }, [roomsRef]);
  
 
-    // // const [ { user }, dispatch ] =useStateValue();
 
-    // // //console.log("UUU", user);
-
-    // const logOut = (e) => {
-    //     e.preventDefault();
-    //     localStorage.clear();
-    //     window.location.href="/login";
-    // }
-
-    // useEffect( ()=> {
-    //  if(roomId){
-    //      db.collection("rooms").doc(roomId).onSnapshot( snapshot => (
-    //          setRoomName(snapshot.data().title)
-    //      ))
-    //      db.collection('rooms').doc(roomId).collection("messages").orderBy('timestamp', 'asc').onSnapshot( snapshot =>(
-    //          setMessages(snapshot.docs.map((doc) => doc.data())))
-    //      );
-    //  }
-    //  //console.log(messages)
-    // //  //console.log(db.collection('rooms').doc(roomId).collection("messages"));
-    // }, [roomId]);
-
-    // useEffect( () => {
-    //     setSeed(Math.floor(Math.random() * 5000));
-    //     }, [roomId]);
-
-    // const sendMessage= (e) => {
-    //     e.preventDefault();
-    //     //console.log("You typed >>>", input);
-    //     db.collection('rooms').doc(roomId).collection('messages').add({
-    //        message: input,
-    //         name: user.displayName,
-    //         timestamp: firebase.firestore.FieldValue.serverTimestamp()
-    //     });
-
-    //     setInput("");
-    // };
 
     return (
-        <>
-        {citiesRef ? <div className="chat">
+         <div className="chat">
             <div className="chat_header">
                 <Avatar src={`https://avatars.dicebear.com/api/human/${seed}.svg`} />
     
@@ -217,8 +160,7 @@ function Chat({name}) {
                   <Button onClick={AddToFirebase} type="submit" disabled={input.length<1}>Send</Button>
               </form>
             </div>
-        </div>:<></>}
-        </>
+        </div>
     )
 //
 }
