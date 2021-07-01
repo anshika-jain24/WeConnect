@@ -4,6 +4,8 @@ import Login from './components/Login'
 import Sidebar from './components/Sidebar';
 import Chat from './components/MainChat';
 import { BrowserRouter as Router , Route, Switch} from 'react-router-dom';
+import CallApp from './components/CallApp/CallApp';
+
 import db from './firebase';
 
 // import firebase from 'firebase/app';
@@ -13,6 +15,7 @@ import db from './firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
 import firebase from 'firebase'
+
 // import { NAME, UID, usersData } from './components/UTILS';
 
 // const firebaseConfig = {
@@ -39,99 +42,84 @@ function App() {
   
 
   const [user] = useAuthState(auth);
-  // console.log("USER: ", use);
+  console.log("USER: ", user);
 
   return(
-    <section>
-      <div className="app">
-      {/* { !user ? ( */}
-      { !user ? 
-        <SignIn />:
-        <div className="app_body">
-      <Router>
-        <Sidebar />
-        <Switch>
-           <Route path="/rooms/:roomId">
-             <Chat name={NAME} />
-          </Route>
+    <Router>
+      <Switch>
+      <Route exact path="/">
+          
+          <section>
+            <div className="app">
+            {!user ? <SignIn/>: 
+              <div className="app_body">
+                <Sidebar/>
+                <Chat name={NAME} />
+              </div>}
+            </div>
+          </section>
+        </Route>
+        <Route exact path="/chat">
+           
+          <section>
+            <div className="app">
+              
+              {!user ? <SignIn/>:<>
+                <div className="app_body">
+                <Sidebar/>
+                <Chat name={NAME} />
+              </div></>}
+            </div>
+          </section>
+        </Route>
+        <Route exact path="/chat/rooms/:roomId">
+          
+          <section>
+            <div className="app">
+            {!user ? <SignIn/>:
+              <div className="app_body">
+                <Sidebar/>
+                <Chat name={NAME} />
+              </div>}
+            </div>
+          </section>
+        </Route>
+        <Route exact path="/video">
+        <section>
+            
+          {!user ? <div className="app"><SignIn/>
+            </div>:
+          <CallApp/>}
+          
+          </section>
+        </Route>
+      </Switch>
+    </Router>
+    // <section>
+    //   <div className="app">
+    //   {/* { !user ? ( */}
+    //   { !user ? 
+    //     <SignIn />:
+    //     <div className="app_body">
+    //   <Router>
+    //     <Sidebar />
+    //     <Switch>
+    //        <Route exact path="/chat/rooms/:roomId">
+    //          <Chat name={NAME} />
+    //       </Route>
 
-          <Route path="/">
-            <Chat name={NAME} />
-          </Route>
-        </Switch>
+    //       {/* <Route exact path="/chat/rooms">
+    //         <Chat name={NAME} />
+    //       </Route> */}
+    //     </Switch>
         
-      </Router>
-      </div>}
-    </div>
-    </section>
+    //   </Router>
+    //   </div>}
+    // </div>
+    // </section>
 );
 }
-  // const creds=localStorage.getItem('uid');
-
-  // return (
-    
-
-  //     {/* ) : (
-  //     <div className="app_body">
-  //     <Router>
-  //       <Sidebar />
-  //       <Switch>
-  //          <Route path="/rooms/:roomId">
-  //            < Chat />
-  //         </Route>
-
-  //         <Route path="/">
-  //           <Chat />
-  //         </Route>
-  //       </Switch>
-        
-  //     </Router>
-  //   </div>
-  //     )
-  //   } */}
-  // </div>
-  // );
   
-//   const [{user},dispatch] = useStateValue();
-
-//   const creds=localStorage.getItem('uid');
-//   admin.auth().getUser(creds)
-//   .then((userRecord) => {
-//     // See the UserRecord reference doc for the contents of userRecord.
-//     //console.log(`Successfully fetched user data: ${userRecord.toJSON()}`);
-//   })
-//   .catch((error) => {
-//     //console.log('Error fetching user data:', error);
-//   });
-
-//   //console.log(creds);
-//   //console.log("IU:", user);
-
-//   return (
-//     <div className="app">
-//       { creds === null ? (
-//         <Login />
-//       ) : (
-//       <div className="app_body">
-//       <Router>
-//         <Sidebar />
-//         <Switch>
-//            <Route exact path="/rooms/:roomId">
-//              < Chat />
-//           </Route>
-
-//           <Route exact path="/">
-//             <Chat />
-//           </Route>
-//         </Switch>
-        
-//       </Router>
-//     </div>
-//       )
-//     }
-//   </div>
-//   );
-// }
 
 function SignIn() {
   //console.log("chal jaaa");
@@ -205,13 +193,6 @@ const [use, setUse] = useState();
 
 }
 
-// function ChatR(){
-//   //console.log("roomieeee");
-//   return (
-//     <h1>HOLA!</h1>
-//   )
-// }
-
 
 function SignOut() {
   return auth.currentUser && (
@@ -221,3 +202,13 @@ function SignOut() {
 
 
 export default App;
+
+
+// "hosting": {
+//   "public": "public",
+//   "ignore": [
+//     "firebase.json",
+//     "**/.*",
+//     "**/node_modules/**"
+//   ]
+// },

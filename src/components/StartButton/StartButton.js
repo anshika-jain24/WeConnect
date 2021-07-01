@@ -11,7 +11,9 @@ export default function StartButton(props) {
     <button
       className="start-button"
       disabled={props.disabled}
-      onClick={props.onClick}
+      onClick={props.onClick} //{() => {
+      //   createCall(name).then((url) => startJoiningCall(url));
+      // }
     >
       Click to start a call
     </button>

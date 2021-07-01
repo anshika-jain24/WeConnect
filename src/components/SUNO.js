@@ -88,3 +88,6 @@ useEffect(() =>{
     console.log("GETTING COMMENTS");
     getComments();
 }, [])
+
+
+// 1 -> Room ? startJoining : createRoom -> startJoining 

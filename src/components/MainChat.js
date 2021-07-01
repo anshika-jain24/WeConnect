@@ -22,10 +22,16 @@ function Chat({name}) {
     const { roomId } = useParams();
     // props / URL 
     const [roomName, setRoomName] =useState("");
+    const [roomUrl,setRoomUrl]=useState("");
     const userName1 = name;  
     const [messages, setMessages]= useState([]);
 
     const {video, toggleVideo} = useContext(StateContext);
+
+    const goToVideo = (e) => {
+        e.preventDefault();
+        window.location.href=`/video?roomUrl=${roomUrl}`;
+    }
 
     console.log("chatvideo" + video);
 
@@ -110,6 +116,7 @@ function Chat({name}) {
         if (doc.exists) {
             console.log("Document data:", doc.data());
             setRoomName(doc.data().title);
+            setRoomUrl(doc.data().roomUrl);
         } else {
             // doc.data() will be undefined in this case
             console.log("No such document!");
@@ -123,7 +130,9 @@ function Chat({name}) {
     //     roomsRef.get().then((snap) => {console.log("S:",snap.data());});
     // }, [roomsRef]);
  
+    console.log("ROOMURL", roomUrl);
 
+    console.log("jjjjjj");
 
 
     return (
@@ -139,7 +148,7 @@ function Chat({name}) {
                     </p> */}
             </div>
                 <div className="chat_headerRight">
-                    <VideocamRoundedIcon onClick={toggleVideo}/>
+                    <VideocamRoundedIcon onClick={goToVideo}/>
                     <PhoneRoundedIcon />
                     {/* <Button onClick={logOut}>Logout</Button> */}
                 </div>

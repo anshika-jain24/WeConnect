@@ -18,10 +18,12 @@
     "react-firebase-hooks": "^3.0.4",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.3",
+    "sed": "0.0.2",
     "serve": "^11.3.0"
   },
   "scripts": {
     "start": "react-scripts start",
+    "netlify-build": "netlify.toml && npm run build",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

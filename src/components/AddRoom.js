@@ -1,19 +1,34 @@
-import React from "react";
+import React, {useState} from "react";
 import  db  from "../firebase";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 import "firebase/firestore";
 import firebase from "firebase/app";
 import AddCircleIcon from '@material-ui/icons/AddCircle';
+import { createBootstrapComponent } from "react-bootstrap/esm/ThemeProvider";
 // import styles from "./LiveRooms.module.css";
+import api from '../api';
 const ROOMID = "AnshikaKaRoom";
 function AddRoom() {
 
+    function testing() {
+        console.log("CALLEDDDDDDDDD");
+    }
+
     function AddRoomToFirebase() {
 
-        //console.log("CALLED ADD_ROOM_TO_FIREBASE!");
+        //console.log("CALLED ADD_ROOM_TO_FIREBASE!"); createDailyRoom();
 
         // var SOS_ID = Math.floor(100000 + Math.random() * 900000);
         const roomName= prompt("Please enter name for chat");
+        var roomU = `https://hellotesting.daily.co/${roomName}`;        
+        api
+        .createRoom(roomName)
+        .then((room) => {console.log("ROOM URL: %s \n RoomU: %s", roomU, room.url)})
+        // .then((room) => room.url)
+        .catch((error) => {
+          console.log('Error creating room', error);
+        });
+
         console.log("roomName", roomName);
         const responser = "u2";
         const sender = "u3";
@@ -23,6 +38,7 @@ function AddRoom() {
             time: firebase.firestore.FieldValue.serverTimestamp(),
             title: roomName,
             users: users,
+            roomUrl: roomU, 
         })
         .then(() => {
             //console.log("New Room Created!");
@@ -43,6 +59,7 @@ function AddRoom() {
         <>
          <div className="sidebarChatNew">
           <AddCircleIcon onClick={AddRoomToFirebase} style={{fontSize:'5.188rem', color: 'white'}} />
+          {/* <inputfield name, onclick */}
          </div>
             {/* <button onClick={AddRoomToFirebase}>Add Room</button> */}
         </>

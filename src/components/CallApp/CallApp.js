@@ -89,8 +89,9 @@ function CallApp(props) {
     //   citiesRef.doc("VideoCall").set({
     //     open: false
     // });
-      toggleVideo();
+      // toggleVideo();
       callObject.leave();
+      window.location.href="/"
     }
 
     // window.location.reload();
