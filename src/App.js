@@ -70,7 +70,7 @@ function App() {
             
           {!user ? <div className="app"><SignIn/>
             </div>:
-          <CallApp/>}
+          <CallApp name={NAME} />}
           
           </section>
         </Route>

@@ -212,6 +212,7 @@ function CallApp(props) {
           <Tray
             disabled={!enableCallButtons}
             onClickLeaveCall={startLeavingCall}
+            name={props.name}
           />
         </CallObjectContext.Provider>
       ) : (

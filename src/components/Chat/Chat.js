@@ -14,9 +14,7 @@ export default function Chat(props) {
   function handleSubmit(event) {
     event.preventDefault();
     callObject.sendAppMessage({ message: inputValue }, '*');
-    const name = callObject.participants().local.user_name
-      ? callObject.participants().local.user_name
-      : 'Guest';
+    const name = props.name;
     setChatHistory([
       ...chatHistory,
       {
