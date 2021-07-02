@@ -22,7 +22,6 @@ const STATE_LEAVING = 'STATE_LEAVING';
 const STATE_ERROR = 'STATE_ERROR';
 
 function CallApp(props) {
-  console.log("OLA");
   const [appState, setAppState] = useState(STATE_IDLE);
   const [roomUrl, setRoomUrl] = useState(null);
   const [name,setName] = useState("");
@@ -31,8 +30,6 @@ function CallApp(props) {
     setName(e.target.value);
   }
   const [callObject, setCallObject] = useState(null);
-
-  // const {video, toggleVideo} = useContext(StateContext);
 
   /**
    * Creates a new call room.
@@ -52,12 +49,6 @@ function CallApp(props) {
 
   /**
    * Starts joining an existing call.
-   *
-   * NOTE: In this demo we show how to completely clean up a call with destroy(),
-   * which requires creating a new call object before you can join() again.
-   * This isn't strictly necessary, but is good practice when you know you'll
-   * be done with the call object for a while and you're no longer listening to its
-   * events.
    */
   const startJoiningCall = useCallback((url) => {
     const newCallObject = DailyIframe.createCallObject();
@@ -73,7 +64,6 @@ function CallApp(props) {
    * 
    */
 
-  //  var citiesRef = db.collection("Views");
 
   const startLeavingCall = useCallback(() => {
     if (!callObject) return;
@@ -109,10 +99,6 @@ function CallApp(props) {
 
   /**
    * Update the page's URL to reflect the active call when roomUrl changes.
-   *
-   * This demo uses replaceState rather than pushState in order to avoid a bit
-   * of state-management complexity. See the comments around enableCallButtons
-   * and enableStartButton for more information.
    */
   useEffect(() => {
     const pageUrl = pageUrlFromRoomUrl(roomUrl);
@@ -120,20 +106,10 @@ function CallApp(props) {
     window.history.replaceState(null, null, pageUrl);
   }, [roomUrl]);
 
-  /**
-   * Uncomment to attach call object to window for debugging purposes.
-   */
-  // useEffect(() => {
-  //   window.callObject = callObject;
-  // }, [callObject]);
+
 
   /**
    * Update app state based on reported meeting state changes.
-   *
-   * NOTE: Here we're showing how to completely clean up a call with destroy().
-   * This isn't strictly necessary between join()s, but is good practice when
-   * you know you'll be done with the call object for a while and you're no
-   * longer listening to its events.
    */
   useEffect(() => {
     if (!callObject) return;
@@ -220,26 +196,10 @@ function CallApp(props) {
   /**
    * Only enable the call buttons (camera toggle, leave call, etc.) if we're joined
    * or if we've errored out.
-   *
-   * !!!
-   * IMPORTANT: calling callObject.destroy() *before* we get the "joined-meeting"
-   * can result in unexpected behavior. Disabling the leave call button
-   * until then avoids this scenario.
-   * !!!
    */
   const enableCallButtons = [STATE_JOINED, STATE_ERROR].includes(appState);
 
-  /**
-   * Only enable the start button if we're in an idle state (i.e. not creating,
-   * joining, etc.).
-   *
-   * !!!
-   * IMPORTANT: only one call object is meant to be used at a time. Creating a
-   * new call object with DailyIframe.createCallObject() *before* your previous
-   * callObject.destroy() completely finishes can result in unexpected behavior.
-   * Disabling the start button until then avoids that scenario.
-   * !!!
-   */
+
   const enableStartButton = appState === STATE_IDLE;
 
   
@@ -247,10 +207,6 @@ function CallApp(props) {
   return (
     <div className="videoapp">
       {showCall ? (
-        // NOTE: for an app this size, it's not obvious that using a Context
-        // is the best choice. But for larger apps with deeply-nested components
-        // that want to access call object state and bind event listeners to the
-        // call object, this can be a helpful pattern.
         <CallObjectContext.Provider value={callObject}>
           <Call roomUrl={roomUrl} />
           <Tray
@@ -267,7 +223,6 @@ function CallApp(props) {
             createCall(name).then((url) => startJoiningCall(url));
           }}
         />
-        {/* <Button onClick={Chat}>Go to Chat</Button> */}
         </>
       )}
     </div>

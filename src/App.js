@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import './App.css';
-import Login from './components/Login'
 import Sidebar from './components/Sidebar';
 import Chat from './components/MainChat';
 import { BrowserRouter as Router , Route, Switch} from 'react-router-dom';
@@ -21,8 +20,6 @@ const firestore = firebase.firestore();
 var NAME = "";
 
 function App() {
-
-  // const [{user},dispatch] = useStateValue();
   
 
   const [user] = useAuthState(auth);
@@ -89,9 +86,7 @@ const [use, setUse] = useState();
   const signInWithGoogle = () => {
     const provider = new firebase.auth.GoogleAuthProvider();
     auth.signInWithPopup(provider) .then(result=>{
-      console.log("R: ", result.user);
       setUse(result.user);
-      // window.location.href="/";
   })
   .catch((err)=>alert(err.message));
 }
@@ -102,7 +97,6 @@ const [use, setUse] = useState();
     const userscoll = db.collection("users");
     const [uuuu]= useCollectionData(userscoll, { idField: 'id' });
 
-    // console.log("uuu", uuuu);
   
    
 
@@ -115,17 +109,11 @@ const [use, setUse] = useState();
         name: use.displayName,
         rooms: [],
   })
-  .then(() => {
-      //console.log("New Room Created!");
-    console.log("Users collection 1", uuuu);
-  })
   .catch((error) => {
       console.error("Error writing document: ", error);
   });
   }else{
-    console.log("user already present")
-    console.log("Users collection", uuuu);
-    
+    console.log("user already present");    
   }}
 
 
@@ -134,8 +122,6 @@ const [use, setUse] = useState();
   if(use){
   console.log("UIDDDD: ", use.displayName);
   NAME = use.displayName;
-  // UID=use.uid;
-  console.log("Mera nassme haio", NAME);
   }
   else{
     console.log("no user");
@@ -150,12 +136,6 @@ const [use, setUse] = useState();
 
 }
 
-
-function SignOut() {
-  return auth.currentUser && (
-    <button className="sign-out" onClick={() => auth.signOut()}>Sign Out</button>
-  )
-}
 
 
 export default App;

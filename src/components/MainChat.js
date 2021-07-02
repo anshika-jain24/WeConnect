@@ -5,7 +5,7 @@ import PhoneRoundedIcon from '@material-ui/icons/PhoneRounded';
 import Button from '@material-ui/core/Button';
 import {useParams} from 'react-router-dom';
 import db from '../firebase';
-import { useCollectionData, useDocumentData } from 'react-firebase-hooks/firestore';
+import { useCollectionData} from 'react-firebase-hooks/firestore';
 import firebase from "firebase";
 
 // const ROOMID = "AnshikaKaRoom";
@@ -18,7 +18,7 @@ function Chat({name}) {
     const [roomName, setRoomName] =useState("");
     const [roomUrl,setRoomUrl]=useState("");
     const userName1 = name;  
-    const [messages, setMessages]= useState([]);
+    // const [messages, setMessages]= useState([]);
 
     const goToVideo = (e) => {
         e.preventDefault();
@@ -28,15 +28,11 @@ function Chat({name}) {
 
     function AddToFirebase(e) {
         e.preventDefault();
-        //console.log("CALLED ADDTOFIREBASE!");
 
         db.collection("rooms").doc(`${roomId}`).collection("messages").add({
             time: firebase.firestore.FieldValue.serverTimestamp(),
             text: input,
             sender: userName1
-        })
-        .then(() => {
-            //console.log(`Message written inside Room Number:  successfully written!`);
         })
         .catch((error) => {
             console.error("Error writing document: ", error);
@@ -44,7 +40,7 @@ function Chat({name}) {
         setInput("");
     };
     const roomies = db.collection("rooms")
-    // const [rrrr] = useCollectionData(roomies, { idField: 'id' });
+
 
     const roomsRef = roomies.doc(`${roomId}`)
     const messagesRef = roomsRef.collection("messages");
@@ -52,9 +48,6 @@ function Chat({name}) {
     const [messag] = useCollectionData(query, { idField: 'id' });
 
     
-    // const userscoll = db.collection("users");
-    // const [uuuu]= useCollectionData(userscoll, { idField: 'id' });
-
 
 
 
@@ -62,12 +55,12 @@ function Chat({name}) {
 
     docRef.get().then((doc) => {
         if (doc.exists) {
-            // console.log("Document data:", doc.data());
+ 
             setRoomName(doc.data().title);
             setRoomUrl(doc.data().roomUrl);
-        } else {
-            // doc.data() will be undefined in this case
-            console.log("No such document!");
+        } 
+        else {
+         console.log("No such document!");
         }
     }).catch((error) => {
         console.log("Error getting document:", error);
@@ -80,15 +73,14 @@ function Chat({name}) {
     return (
          <div className="chat">
             <div className="chat_header">
-                {/* <Avatar src={`https://avatars.dicebear.com/api/human/${seed}.svg`} /> */}
+    
     
             <div className="chat_headerInfo">
                 <h3>{roomName}</h3>
             </div>
                 <div className="chat_headerRight">
                     <VideocamRoundedIcon onClick={goToVideo}/>
-                    <PhoneRoundedIcon />
-                    {/* <Button onClick={logOut}>Logout</Button> */}
+                    <PhoneRoundedIcon />    
                 </div>
             </div>
             <div className="chat_body">

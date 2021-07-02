@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import './Sidebar.css' 
 import SidebarChat from './SidebarChat';
 import db from '../firebase'
@@ -10,26 +10,11 @@ const auth = firebase.auth();
 
 function Sidebar({name}) {
 
-    console.log("Sidebar Name", name);
-    const [ rooms, setRooms ] = useState([]);
-    // const [{user, dispacth}] = useStateValue();
-    // useEffect(() => {
-    //     db.collection('rooms').onSnapshot(snapshot => 
-    //     setRooms(
-    //         snapshot.docs.map(doc => ({
-    //             id: doc.id,
-    //             data: doc.data(),
-    //         }))
-    //        )
-    //     );
-
-    // }, []);
 
     const roomies = db.collection("rooms");
     const [roomData]=useCollectionData(roomies, {idField: 'id'});
 
-    //console.log(roomies);
-    //console.log("Room data", roomData);
+    
 
     return(
         <div className="sidebar">
@@ -40,7 +25,6 @@ function Sidebar({name}) {
          <div className="sidebar_chats">
              {
                  roomData ? roomData.map(room => (
-                    //  if(room.id is present in user ka rooms ka array)
                      <SidebarChat key={room.id} id={room.id} name={room.title} />
                  )):<></>
              }

@@ -1,35 +1,6 @@
 const newRoomEndpoint =
   `${window.location.origin}/api/rooms`;
 
-/**
- * Create a short-lived room for demo purposes.
- *
- * It uses the redirect proxy as specified in netlify.toml`
- * This will work locally if you following the Netlify specific instructions
- * in README.md
- *
- * See https://docs.daily.co/reference#create-room for more information on how
- * to use the Daily REST API to create rooms and what options are available. 
- */
-
-//  async function getURL() {
-
-//   console.log("GET Comment!", url2);
-
-//   axios.get(`${baseUrl}/post/comments?userName=alpha&postId=1`, {headers:{"Content-Type" : "application/json"}}) 
-//   .then(function(response){
-//       setComments(response.data);
-//       setLoading(false);
-//       console.log(response);
-//   })
-//   .catch(function(error){console.log("E", error)})
-
-// }
-// useEffect(() =>{
-//   console.log("GETTING COMMENTS");
-//   getComments();
-// }, [])
-
 
 async function createRoom(name) {
 
@@ -59,8 +30,6 @@ async function createRoom(name) {
     console.log(room)
   return room;
 
-  // Comment out the above and uncomment the below, using your own URL
-  // return { url: "https://hellotesting.daily.co/anshika" };
 }
 
 
