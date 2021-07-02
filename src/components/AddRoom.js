@@ -29,7 +29,7 @@ function AddRoom() {
           console.log('Error creating room', error);
         });
 
-        console.log("roomName", roomName);
+        // console.log("roomName", roomName);
         const responser = "u2";
         const sender = "u3";
         const users = [`${responser}`, `${sender}`];

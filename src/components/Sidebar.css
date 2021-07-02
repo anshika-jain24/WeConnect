@@ -7,10 +7,12 @@
 .avatar{
     margin-left: 10px;
 }
-.sidebar_search{
+.sidebar_name{
     display: flex;
+    justify-content: space-between;
     align-items: center;
     background-color: #0048aa;
+    color: white;
     height: 39px;
     padding: 10px;
 }

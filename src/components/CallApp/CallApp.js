@@ -32,7 +32,7 @@ function CallApp(props) {
   }
   const [callObject, setCallObject] = useState(null);
 
-  const {video, toggleVideo} = useContext(StateContext);
+  // const {video, toggleVideo} = useContext(StateContext);
 
   /**
    * Creates a new call room.

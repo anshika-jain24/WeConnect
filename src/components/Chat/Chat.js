@@ -63,11 +63,13 @@ export default function Chat(props) {
 
   return props.onClickDisplay ? (
     <div className="videochat">
+      <div className="chatss">
       {chatHistory.map((entry, index) => (
         <div key={`entry-${index}`} className="messageList">
           <b>{entry.sender}</b>: {entry.message}
         </div>
       ))}
+      </div>
       <form onSubmit={handleSubmit}>
         <label htmlFor="chatInput"></label>
         <input

@@ -83,6 +83,7 @@
 }
 
 .chat_name{
+    color: black;
     position: absolute;
     top: -15px;
     font-weight: 800;

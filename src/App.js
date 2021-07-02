@@ -8,28 +8,12 @@ import CallApp from './components/CallApp/CallApp';
 
 import db from './firebase';
 
-// import firebase from 'firebase/app';
-// import 'firebase/firestore';
-// import 'firebase/auth';
 
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
 import firebase from 'firebase'
 
-// import { NAME, UID, usersData } from './components/UTILS';
 
-// const firebaseConfig = {
-//     apiKey: "AIzaSyDwG9zCaY_t3H8oBnmLdnro24FOfK2tBf0",
-//     authDomain: "weconnect-21295.firebaseapp.com",
-//     projectId: "weconnect-21295",
-//     storageBucket: "weconnect-21295.appspot.com",
-//     messagingSenderId: "580642898899",
-//     appId: "1:580642898899:web:94955ef28075edc9d4e526",
-//     measurementId: "G-1TFWW1D51T"
-//     // databaseURL: "https://chatify-e98ae.firebaseio.com",
-//   };
-
-// firebase.initializeApp( firebaseConfig )
 
 const auth = firebase.auth();
 const firestore = firebase.firestore();
@@ -42,7 +26,7 @@ function App() {
   
 
   const [user] = useAuthState(auth);
-  console.log("USER: ", user);
+
 
   return(
     <Router>
@@ -53,7 +37,7 @@ function App() {
             <div className="app">
             {!user ? <SignIn/>: 
               <div className="app_body">
-                <Sidebar/>
+                <Sidebar name={NAME} />
                 <Chat name={NAME} />
               </div>}
             </div>
@@ -66,7 +50,7 @@ function App() {
               
               {!user ? <SignIn/>:<>
                 <div className="app_body">
-                <Sidebar/>
+                <Sidebar name={NAME} />
                 <Chat name={NAME} />
               </div></>}
             </div>
@@ -78,7 +62,7 @@ function App() {
             <div className="app">
             {!user ? <SignIn/>:
               <div className="app_body">
-                <Sidebar/>
+                <Sidebar name={NAME} />
                 <Chat name={NAME} />
               </div>}
             </div>
@@ -95,34 +79,12 @@ function App() {
         </Route>
       </Switch>
     </Router>
-    // <section>
-    //   <div className="app">
-    //   {/* { !user ? ( */}
-    //   { !user ? 
-    //     <SignIn />:
-    //     <div className="app_body">
-    //   <Router>
-    //     <Sidebar />
-    //     <Switch>
-    //        <Route exact path="/chat/rooms/:roomId">
-    //          <Chat name={NAME} />
-    //       </Route>
 
-    //       {/* <Route exact path="/chat/rooms">
-    //         <Chat name={NAME} />
-    //       </Route> */}
-    //     </Switch>
-        
-    //   </Router>
-    //   </div>}
-    // </div>
-    // </section>
 );
 }
   
 
 function SignIn() {
-  //console.log("chal jaaa");
 const [use, setUse] = useState();
   const signInWithGoogle = () => {
     const provider = new firebase.auth.GoogleAuthProvider();
@@ -140,11 +102,9 @@ const [use, setUse] = useState();
     const userscoll = db.collection("users");
     const [uuuu]= useCollectionData(userscoll, { idField: 'id' });
 
-    console.log("uuu", uuuu);
+    // console.log("uuu", uuuu);
   
-    // await function
-    // await GET call
-    // then context 
+   
 
   if(use){
     let userData = use;
@@ -162,16 +122,13 @@ const [use, setUse] = useState();
   .catch((error) => {
       console.error("Error writing document: ", error);
   });
-    // store it in UTILS  
   }else{
     console.log("user already present")
-    // const userscoll = db.collection("users");
     console.log("Users collection", uuuu);
-    // pass name / id 
-    // store it in UTILS
+    
   }}
 
-  // console.log("UID: ", use);
+
 
 
   if(use){
@@ -204,11 +161,3 @@ function SignOut() {
 export default App;
 
 
-// "hosting": {
-//   "public": "public",
-//   "ignore": [
-//     "firebase.json",
-//     "**/.*",
-//     "**/node_modules/**"
-//   ]
-// },
