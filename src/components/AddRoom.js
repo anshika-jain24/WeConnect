@@ -10,10 +10,6 @@ import api from '../api';
 const ROOMID = "AnshikaKaRoom";
 function AddRoom() {
 
-    function testing() {
-        console.log("CALLEDDDDDDDDD");
-    }
-
     function AddRoomToFirebase() {
 
         //console.log("CALLED ADD_ROOM_TO_FIREBASE!"); createDailyRoom();
@@ -24,12 +20,11 @@ function AddRoom() {
         api
         .createRoom(roomName)
         .then((room) => {console.log("ROOM URL: %s \n RoomU: %s", roomU, room.url)})
-        // .then((room) => room.url)
         .catch((error) => {
           console.log('Error creating room', error);
         });
 
-        // console.log("roomName", roomName);
+
         const responser = "u2";
         const sender = "u3";
         const users = [`${responser}`, `${sender}`];
@@ -40,16 +35,13 @@ function AddRoom() {
             users: users,
             roomUrl: roomU, 
         })
-        .then(() => {
-            //console.log("New Room Created!");
-        })
         .catch((error) => {
             console.error("Error writing document: ", error);
         });
     
     };
 
-    //console.log("CONNECTING TO ROOMS!");
+
     const messagesRef = db.collection("rooms");
     const query = messagesRef; 
     const [room] = useCollectionData(query, { idField: 'id' });
@@ -59,9 +51,7 @@ function AddRoom() {
         <>
          <div className="sidebarChatNew">
           <AddCircleIcon onClick={AddRoomToFirebase} style={{fontSize:'5.188rem', color: 'white'}} />
-          {/* <inputfield name, onclick */}
          </div>
-            {/* <button onClick={AddRoomToFirebase}>Add Room</button> */}
         </>
     )
 

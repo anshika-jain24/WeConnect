@@ -21,12 +21,12 @@ function SidebarChat({addNewChat, id , name}) {
         setSeed(Math.floor(Math.random() * 5000));
         }, []);
 
-
+        // console.log(name);
 
     return  !addNewChat ? (
         <Link to={`/chat/rooms/${id}`} >
         <div className="sidebarChat">
-        <Avatar src={`https://avatars.dicebear.com/api/human/${seed}.svg`} />
+        <Avatar>{name.charAt(0).toUpperCase()}</Avatar>
            <div className="sidebarChat_info">
                
             <h2>{name}</h2>
