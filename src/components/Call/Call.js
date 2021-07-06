@@ -72,7 +72,7 @@ export default function Call() {
       });
     }
 
-    // We're making an assumption here: there is no camera error when callObject
+    // I am making an assumption here: there is no camera error when callObject
     // is first assigned.
 
     callObject.on('camera-error', handleCameraErrorEvent);
@@ -96,8 +96,6 @@ export default function Call() {
       });
     }
 
-    // We're making an assumption here: there is no error when callObject is
-    // first assigned.
 
     callObject.on('error', handleErrorEvent);
 

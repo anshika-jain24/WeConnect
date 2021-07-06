@@ -11,6 +11,7 @@ import { logDailyEvent } from '../../logUtils';
 import db from '../../firebase';
 import { StateContext } from '../../StateProvider';
 import { TextField } from '@material-ui/core';
+import { useParams } from 'react-router-dom';
 // import Chat from '../MainChat';
 // import Button from '@material-ui/core/Button';
 
@@ -25,6 +26,10 @@ function CallApp(props) {
   const [appState, setAppState] = useState(STATE_IDLE);
   const [roomUrl, setRoomUrl] = useState(null);
   const [name,setName] = useState("");
+
+  const t=useParams();
+
+  console.log("params ", t.roomId);
 
   const handleName = (e) => {
     setName(e.target.value);

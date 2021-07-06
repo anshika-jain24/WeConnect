@@ -68,7 +68,7 @@ function App() {
             </div>
           </section>
         </Route>
-        <Route exact path="/video">
+        <Route exact path="/video/:roomId">
         <section>
             
           {!user ? <div className="app"><Login />

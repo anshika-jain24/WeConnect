@@ -22,7 +22,7 @@ function Chat({name}) {
 
     const goToVideo = (e) => {
         e.preventDefault();
-        window.location.href=`/video?roomUrl=${roomUrl}`;
+        window.location.href=`/video/${roomId}?roomUrl=${roomUrl}`;
     }
 
 

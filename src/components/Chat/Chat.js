@@ -1,11 +1,18 @@
 import React, { useContext, useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import CallObjectContext from '../../CallObjectContext';
 import './Chat.css';
+import db from '../../firebase';
+import firebase from 'firebase';
 
 export default function Chat(props) {
   const callObject = useContext(CallObjectContext);
   const [inputValue, setInputValue] = useState('');
   const [chatHistory, setChatHistory] = useState([]);
+
+  const R=useParams();
+
+  const roomId=R.roomId;
 
   const handleChange = (event) => {
     setInputValue(event.target.value);
@@ -22,6 +29,16 @@ export default function Chat(props) {
         message: inputValue,
       },
     ]);
+
+    db.collection("rooms").doc(`${roomId}`).collection("messages").add({
+      time: firebase.firestore.FieldValue.serverTimestamp(),
+      text: inputValue,
+      sender: name
+    })
+    .catch((error) => {
+        console.error("Error writing document: ", error);
+    });
+
     setInputValue('');
   }
 

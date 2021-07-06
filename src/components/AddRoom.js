@@ -4,10 +4,8 @@ import { useCollectionData } from "react-firebase-hooks/firestore";
 import "firebase/firestore";
 import firebase from "firebase/app";
 import AddCircleIcon from '@material-ui/icons/AddCircle';
-import { createBootstrapComponent } from "react-bootstrap/esm/ThemeProvider";
-// import styles from "./LiveRooms.module.css";
 import api from '../api';
-const ROOMID = "AnshikaKaRoom";
+// const ROOMID = "AnshikaKaRoom";
 function AddRoom() {
 
     function AddRoomToFirebase() {
