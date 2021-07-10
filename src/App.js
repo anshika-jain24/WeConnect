@@ -1,17 +1,13 @@
-import React, {useState} from 'react';
+import React from 'react';
 import './App.css';
 import Sidebar from './components/Sidebar';
 import Chat from './components/MainChat';
 import { BrowserRouter as Router , Route, Switch} from 'react-router-dom';
 import CallApp from './components/CallApp/CallApp';
 import Login from './components/Login';
-
-import db from './firebase';
-
-
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { useCollectionData } from 'react-firebase-hooks/firestore';
 import firebase from 'firebase'
+import Greetings from './components/Greetings';
 
 
 
@@ -38,7 +34,7 @@ function App() {
             {!user ? <Login/>: 
               <div className="app_body">
                 <Sidebar name={NAME} user={user}/>
-                <Chat name={NAME} />
+                <Greetings />
               </div>}
             </div>
           </section>
@@ -51,7 +47,7 @@ function App() {
               {!user ? <Login />:<>
                 <div className="app_body">
                 <Sidebar name={NAME} user={user}/>
-                <Chat name={NAME} />
+                <Greetings />
               </div></>}
             </div>
           </section>

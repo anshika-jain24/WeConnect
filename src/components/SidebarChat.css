@@ -6,8 +6,8 @@
 }
 
 .sidebarChat {
-    background-color: #0048aa;
-    color: white;
+    background-color: #A2DBFA;
+    color: black;
 }
 
 .sidebarChatNew{
@@ -17,11 +17,11 @@
     position: fixed;
     bottom: 1rem;
     width: 3.8%;
-    left: 21.8%;
+    left: 14.8%;
 }
 
 .sidebarChat:hover {
-    background-color: #1e457b;
+    background-color: #39A2DB;
 }
 
 a{

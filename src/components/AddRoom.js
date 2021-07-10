@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 import  db  from "../firebase";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 import "firebase/firestore";
@@ -9,33 +9,37 @@ import api from '../api';
 function AddRoom() {
 
     function AddRoomToFirebase() {
-
-        //console.log("CALLED ADD_ROOM_TO_FIREBASE!"); createDailyRoom();
-
-        // var SOS_ID = Math.floor(100000 + Math.random() * 900000);
+;
         const roomName= prompt("Please enter name for chat");
-        var roomU = `https://hellotesting.daily.co/${roomName}`;        
-        api
-        .createRoom(roomName)
-        .then((room) => {console.log("ROOM URL: %s \n RoomU: %s", roomU, room.url)})
-        .catch((error) => {
-          console.log('Error creating room', error);
-        });
+        if(roomName && roomName!== "" )
+        {
+            var roomU = `https://hellotesting.daily.co/${roomName}`;        
+            api
+            .createRoom(roomName)
+            .then((room) => {console.log("ROOM URL: %s \n RoomU: %s", roomU, room.url)})
+            .catch((error) => {
+            console.log('Error creating room', error);
+            });
 
 
-        const responser = "u2";
-        const sender = "u3";
-        const users = [`${responser}`, `${sender}`];
+            const responser = "u2";
+            const sender = "u3";
+            const users = [`${responser}`, `${sender}`];
 
-        db.collection("rooms").add({
-            time: firebase.firestore.FieldValue.serverTimestamp(),
-            title: roomName,
-            users: users,
-            roomUrl: roomU, 
-        })
-        .catch((error) => {
-            console.error("Error writing document: ", error);
-        });
+            db.collection("rooms").add({
+                time: firebase.firestore.FieldValue.serverTimestamp(),
+                title: roomName,
+                users: users,
+                roomUrl: roomU, 
+            })
+            .catch((error) => {
+                console.error("Error writing document: ", error);
+            });
+        }
+        else
+        {
+            alert("Empty room");
+        }
     
     };
 

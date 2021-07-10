@@ -1,7 +1,7 @@
 .sidebar{
     display: flex;
     flex-direction: column;
-    flex: 0.35;
+    flex: 0.25;
 }
 
 .avatar{
@@ -11,8 +11,8 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #0048aa;
-    color: white;
+    background-color: #A2DBFA;
+    color: black;
     height: 39px;
     padding: 10px;
 }

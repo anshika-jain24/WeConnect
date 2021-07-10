@@ -1,24 +1,22 @@
 import React, { useState} from 'react';
 import "./MainChat.css";
 import VideocamRoundedIcon from '@material-ui/icons/VideocamRounded';
-import PhoneRoundedIcon from '@material-ui/icons/PhoneRounded';
 import Button from '@material-ui/core/Button';
 import {useParams} from 'react-router-dom';
 import db from '../firebase';
 import { useCollectionData} from 'react-firebase-hooks/firestore';
 import firebase from "firebase";
 
-// const ROOMID = "AnshikaKaRoom";
 
 function Chat({name}) {
     const [input, setInput]=useState("");
-    // const [seed, setSeed] = useState('');
+   
     const { roomId } = useParams();
     // props / URL 
     const [roomName, setRoomName] =useState("");
     const [roomUrl,setRoomUrl]=useState("");
     const userName1 = name;  
-    // const [messages, setMessages]= useState([]);
+
 
     const goToVideo = (e) => {
         e.preventDefault();
@@ -76,11 +74,10 @@ function Chat({name}) {
     
     
             <div className="chat_headerInfo">
-                <h3>{roomName}</h3>
+                <h3><span className="brandName">WeConnect</span><span className="roomName"> | {roomName.toUpperCase()}</span></h3>
             </div>
                 <div className="chat_headerRight">
-                    <VideocamRoundedIcon onClick={goToVideo}/>
-                    <PhoneRoundedIcon />    
+                    <VideocamRoundedIcon style={{ cursor: 'pointer'}} onClick={goToVideo}/>  
                 </div>
             </div>
             <div className="chat_body">

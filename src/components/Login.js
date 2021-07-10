@@ -2,7 +2,7 @@ import React from 'react'
 import {Button} from "@material-ui/core"
 import "./Login.css"
 import {auth,provider} from '../firebase'
-
+import video from '../images/Meeting-1.gif';
 
 function Login() {
 
@@ -19,20 +19,17 @@ function Login() {
     };
     return (
         <div className="login">
-            <div className="container__box">
+            <div style={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center'
+            }}>
             <h1 className="brand__name">WeConnect</h1>
-            <h1 className="tagline">Think Less, Chat More.</h1>
-            <hr 
-                style={{
-                    color: "white",
-                    width: "55px",
-                    marginBottom: "80px"
-                }}
-            />
+            <h1 className="tagline">Think Less, Connect More.</h1>
             <Button type="submit" className="login__button" onClick={signIn}> Sign In using Google </Button>
-            
-
             </div>
+            
+            <img src={video} />
         </div>
     )
 }

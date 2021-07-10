@@ -5,13 +5,21 @@ import db from '../firebase'
 import Button from '@material-ui/core/Button';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
 import firebase from 'firebase';
+import { makeStyles } from '@material-ui/core/styles';
 import Avatar from '@material-ui/core/Avatar';
 
 
 const auth = firebase.auth();
 
+const useStyles = makeStyles((theme) => ({
+    purple: {
+      backgroundColor: '#086dd8',
+    }
+  }));
+
 function Sidebar({name, user}) {
 
+    const classes= useStyles();
 
     const roomies = db.collection("rooms");
     const [roomData]=useCollectionData(roomies, {idField: 'id'});
@@ -21,7 +29,7 @@ function Sidebar({name, user}) {
     return(
         <div className="sidebar">
          <div className="sidebar_name">
-             <Avatar src={user.photoURL}>{name.charAt(0).toUpperCase()}</Avatar>
+             <Avatar className={classes.purple} src={user.photoURL}>{name.charAt(0).toUpperCase()}</Avatar>
              <p>Welcome, {name}</p>
              <Button color="inherit" onClick={() => auth.signOut()}>LogOut</Button>
          </div>
