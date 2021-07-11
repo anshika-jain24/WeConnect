@@ -13,7 +13,7 @@ import EmojiEmotionsIcon from '@material-ui/icons/EmojiEmotions';
 
 function Chat({name}) {
     const [input, setInput]=useState("");
-    const [showEmojis, setEmojis]=useState(0);
+    const [showEmojis, setEmojis]=useState(true);
     const { roomId } = useParams();
     // props / URL 
     const [roomName, setRoomName] =useState("");
@@ -93,12 +93,17 @@ function Chat({name}) {
             
             </div>
             <div className="chat_footer">
-                {/* {
-                    showEmojis ?  <span><Picker onSelect={(e) => {
+                {
+                    !showEmojis ?  <><span style={{
+                        position:'relative',
+                        top:'-190px'
+                    }}><Picker onSelect={(e) => {
                         let emoji= e.native;
                         setInput(input+emoji)
-                    }} /></span> : <span><EmojiEmotionsIcon onClick={setEmojis(1)} /></span> */}
-                {/* } */}
+                    }} /></span><span><EmojiEmotionsIcon onClick={() => { setEmojis(!showEmojis)}} /></span></> : <span><EmojiEmotionsIcon onClick={() => { setEmojis(!showEmojis)}} /></span>
+                }
+            
+                {/* //yeh error dera dekhio vroo maine yeh try kia tha matlab emojis add hore but muje vaha toggle krna smjha rha h? jaise ek smiley ho uspr click krne ke bad emojis khule vo krna m dikkt ari */}
               <form>
                   <input value={input} onChange={ (e) => setInput(e.target.value)} type="text" placeholder="Type a message" />
                   <Button onClick={AddToFirebase} type="submit" disabled={input.length<1}>Send</Button>
