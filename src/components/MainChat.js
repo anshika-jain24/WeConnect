@@ -6,6 +6,8 @@ import {useParams} from 'react-router-dom';
 import db from '../firebase';
 import { useCollectionData} from 'react-firebase-hooks/firestore';
 import firebase from "firebase";
+import 'emoji-mart/css/emoji-mart.css';
+import { Picker } from 'emoji-mart';
 
 
 function Chat({name}) {
@@ -91,6 +93,7 @@ function Chat({name}) {
             
             </div>
             <div className="chat_footer">
+                {/* <span><Picker /></span> */}
               <form>
                   <input value={input} onChange={ (e) => setInput(e.target.value)} type="text" placeholder="Type a message" />
                   <Button onClick={AddToFirebase} type="submit" disabled={input.length<1}>Send</Button>
