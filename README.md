@@ -7,12 +7,12 @@
 _____________________________________________________________________________________________________
 
 ## Features : 
-1. ### **Authentication** -
+1. ### Authentication -
     - When the user opens this application, he is prompted to sign-in through his Google account if he already has a Google account, otherwise he will be required to go and sign-up using Google. 
     - The authentication is achieved using Firebase Google Auth. Firebase Authentication provides backend services, easy-to-use SDKs, and ready-made UI libraries to authenticate users to your app. It supports authentication using passwords, phone numbers, popular federated identity providers like Google, Facebook and Twitter, and more.
     ####
 ![Screenshot-3](src/images/Screenshot-3.jpg "Authentication")
-2. ### **Chat** -
+2. ### Chat -
     - Once the user is signed in, he will be able to view different groups, where he can go and connect with people. 
     - This application also enables people to create new rooms as per their requirement. They can ask people to come and talk in the same room. 
     - To join an existing conversation, all they have to do and click on the room they want to join. The users can see the existing conversations and can continue to that.
@@ -20,7 +20,7 @@ ________________________________________________________________________________
     - Along with text messages, they can also send emojis, which adds life to the conversation.
     ####
 ![Screenshot-2](src/images/Screenshot-2.png "Chat")
-3. ### **VideoCall** -
+3. ### VideoCall -
     - Instantly go from group chat to video conference with the touch of a button.
     - Make meetings more personal and encourage teamwork when you virtually meet face-to-face. Meet in any situation, whether you’re calling one-on-one, delivering a sales pitch, hosting a team training, or running a company-wide town hall.
     - Click on the video call button present on the top of the room.
