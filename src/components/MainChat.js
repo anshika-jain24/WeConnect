@@ -8,11 +8,12 @@ import { useCollectionData} from 'react-firebase-hooks/firestore';
 import firebase from "firebase";
 import 'emoji-mart/css/emoji-mart.css';
 import { Picker } from 'emoji-mart';
+import EmojiEmotionsIcon from '@material-ui/icons/EmojiEmotions';
 
 
 function Chat({name}) {
     const [input, setInput]=useState("");
-   
+    const [showEmojis, setEmojis]=useState(0);
     const { roomId } = useParams();
     // props / URL 
     const [roomName, setRoomName] =useState("");
@@ -25,6 +26,7 @@ function Chat({name}) {
         window.location.href=`/video/${roomId}?roomUrl=${roomUrl}`;
     }
 
+    console.log("emojis", showEmojis);
 
     function AddToFirebase(e) {
         e.preventDefault();
@@ -46,8 +48,6 @@ function Chat({name}) {
     const messagesRef = roomsRef.collection("messages");
     const query = messagesRef.orderBy('time',"asc");
     const [messag] = useCollectionData(query, { idField: 'id' });
-
-    
 
 
 
@@ -87,13 +87,18 @@ function Chat({name}) {
                  <p className={`chat_message ${message.sender === userName1 && `chat_receiver`}`}>
                     <span className="chat_name">{message.sender}</span>{message.text}
                     <span className="chat_timestamp">{new Date(message.time?.toDate
-                    ()).toUTCString()}</span>
+                    ()).toLocaleString(undefined, {timeZone: 'Asia/Kolkata'})}</span>
                 </p>
                 )):<></>}
             
             </div>
             <div className="chat_footer">
-                {/* <span><Picker /></span> */}
+                {/* {
+                    showEmojis ?  <span><Picker onSelect={(e) => {
+                        let emoji= e.native;
+                        setInput(input+emoji)
+                    }} /></span> : <span><EmojiEmotionsIcon onClick={setEmojis(1)} /></span> */}
+                {/* } */}
               <form>
                   <input value={input} onChange={ (e) => setInput(e.target.value)} type="text" placeholder="Type a message" />
                   <Button onClick={AddToFirebase} type="submit" disabled={input.length<1}>Send</Button>

@@ -7,6 +7,7 @@ import { useCollectionData } from 'react-firebase-hooks/firestore';
 import firebase from 'firebase';
 import { makeStyles } from '@material-ui/core/styles';
 import Avatar from '@material-ui/core/Avatar';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 
 const auth = firebase.auth();
@@ -30,8 +31,8 @@ function Sidebar({name, user}) {
         <div className="sidebar">
          <div className="sidebar_name">
              <Avatar className={classes.purple} src={user.photoURL}>{name.charAt(0).toUpperCase()}</Avatar>
-             <p>Welcome, {name}</p>
-             <Button color="inherit" onClick={() => auth.signOut()}>LogOut</Button>
+             <p style={{paddingLeft: '0.6rem'}}>{name}</p>
+             <Button style={{marginLeft: '9rem'}} color="inherit" onClick={() => auth.signOut()}><ExitToAppIcon/></Button>
          </div>
          <div className="sidebar_chats">
              {

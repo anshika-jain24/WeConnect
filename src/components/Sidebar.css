@@ -9,7 +9,7 @@
 }
 .sidebar_name{
     display: flex;
-    justify-content: space-between;
+    /* justify-content: space-between; */
     align-items: center;
     background-color: #A2DBFA;
     color: black;
