@@ -1,4 +1,4 @@
-# MICROSOFT ENGAGE'21 | WeConnect
+# MICROSOFT ENGAGE'21 | WeConnect - Think Less, Connect More!
 
 <b> One stop solution to connect with your peers over text and through Video calls! </b>
 
@@ -24,6 +24,8 @@
 <br/>
 
 ![Screenshot-2](src/images/Screenshot-2.png "Chat")
+
+![Screenshot-4](src/images/Screenshot-4.png "Emoji")
 
 <br/>
 
