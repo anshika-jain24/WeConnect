@@ -1,1 +1,3 @@
-MICROSOFT ENGAGE | WeConnect - A chat and video calling application to connect with all of your friends easily.
+# MICROSOFT ENGAGE | WeConnect
+
+#### One stop solution to connect with your peers over text and through Video calls
