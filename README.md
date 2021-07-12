@@ -64,6 +64,10 @@ _MICROSOFT ENGAGE'21_
 
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+## Introduction to Daily Video Call API
+
+Daily is a developer platform built on WebRTC. Our APIs let developers add real time video and audio calls to any app or site. With just a few lines of code, you can embed a video call widget, which works across browsers and devices with built-bandwidth management.
+
 ## Key Concepts 
 
 These are few key concept which have been used to implement the video calling feature of this application.
