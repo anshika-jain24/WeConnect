@@ -25,7 +25,6 @@ function Sidebar({name, user}) {
     const roomies = db.collection("rooms");
     const [roomData]=useCollectionData(roomies, {idField: 'id'});
 
-    // console.log(user.photoURL);
 
     return(
         <div className="sidebar">

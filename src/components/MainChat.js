@@ -26,7 +26,6 @@ function Chat({name}) {
         window.location.href=`/video/${roomId}?roomUrl=${roomUrl}`;
     }
 
-    console.log("emojis", showEmojis);
 
     function AddToFirebase(e) {
         e.preventDefault();
@@ -103,7 +102,6 @@ function Chat({name}) {
                     }} /></span><span><EmojiEmotionsIcon onClick={() => { setEmojis(!showEmojis)}} /></span></> : <span><EmojiEmotionsIcon onClick={() => { setEmojis(!showEmojis)}} /></span>
                 }
             
-                {/* //yeh error dera dekhio vroo maine yeh try kia tha matlab emojis add hore but muje vaha toggle krna smjha rha h? jaise ek smiley ho uspr click krne ke bad emojis khule vo krna m dikkt ari */}
               <form>
                   <input value={input} onChange={ (e) => setInput(e.target.value)} type="text" placeholder="Type a message" />
                   <Button onClick={AddToFirebase} type="submit" disabled={input.length<1}>Send</Button>

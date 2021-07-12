@@ -29,7 +29,7 @@ function CallApp(props) {
 
   const t=useParams();
 
-  console.log("params ", t.roomId);
+
 
   const handleName = (e) => {
     setName(e.target.value);
@@ -41,7 +41,7 @@ function CallApp(props) {
    */
   const createCall = useCallback((name) => {
     setAppState(STATE_CREATING);
-    console.log(name);
+
     return api
       .createRoom(name)
       .then((room) => room.url)
