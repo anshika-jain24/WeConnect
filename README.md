@@ -1,8 +1,25 @@
-# MICROSOFT ENGAGE'21 | WeConnect - Think Less, Connect More!
+# WeConnect - Think Less, Connect More! :video_camera:
+_MICROSOFT ENGAGE'21_
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 <b> One stop solution to connect with your peers over text and through Video calls! </b>
 
 ![Screenshot-1](src/images/Screenshot-1.png "Homepage")
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+### Have a Personalised Experience!  :sparkles:
+- [x] Have a seamless signing in experience using Google Sign-In.
+- [x] Join any room as per your interest.
+- [x] Connect over text, along with sending emojis to express yourself :computer:
+- [x] Tired of texting? Start a new video call and invite people to join it, with a single click. :couple:
+- [x] Not able to switch on your video? Toggle your video off, for only a voice only experience.  
+- [x] Easy collaboration with others using screen share. 
+- [x] Share your opinions and convey your ideas over chat during the videocall. :calling:
+- [x] Scared of missing something important? Access the in-call chats even after the call ends.
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 ## Features : 
 ### 1. &nbsp; Authentication
@@ -15,6 +32,8 @@
 
 <br/>
 
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 ### 2. &nbsp; Chat
 - Once the user is signed in, he will be able to view different groups, where he can go and connect with people.
 - This application also enables people to create new rooms as per their requirement. They can ask people to come and talk in the same room. 
@@ -25,9 +44,13 @@
 
 ![Screenshot-2](src/images/Screenshot-2.png "Chat")
 
+###  :smiley: Send Emojis over chat, using the emoji keyboard :smiley:
+
 ![Screenshot-4](src/images/Screenshot-4.png "Emoji")
 
 <br/>
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 ### 3. &nbsp; Video Call
 - Instantly go from group chat to video conference with the touch of a button.
@@ -37,6 +60,9 @@
 - The users can join in the meeting, turn on and off their cameras, mute and unmute themselves.
 - They can even present their screens in case they want to present something.
 - There is also a feature to chat. All those who are present in the meeting can write their thoughts and have a conversation in the chat box. The amazing thing about this feature is that they can resume their conversation even after the meeting ends. YES! THAT’S RIGHT! They can see their messages after the meeting as well.
+
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 ## Key Concepts 
 
@@ -75,16 +101,17 @@ Once the room has been created, we'll start the process of joining it by invokin
       // update component state to a "joining" state...
       callObject.join({ url });
     }, []);
+    
 
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 ## TECHSTACK USED :
 
 **FRONTEND** - ReactJS, Material UI
 
-**BACKEND** - Firebase
- - Used [Daily API](https://www.daily.co/) for video calling 
+**BACKEND** - Firebase, [Daily API](https://www.daily.co/) for video calling 
 
-
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 ## HOW TO RUN THIS APP LOCALLY
 
