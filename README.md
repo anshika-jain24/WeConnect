@@ -61,6 +61,10 @@ _MICROSOFT ENGAGE'21_
 - They can even present their screens in case they want to present something.
 - There is also a feature to chat. All those who are present in the meeting can write their thoughts and have a conversation in the chat box. The amazing thing about this feature is that they can resume their conversation even after the meeting ends. YES! THAT’S RIGHT! They can see their messages after the meeting as well.
 
+![VideoCall](src/images/VideoCall.jpeg "VideoCall")
+
+![Screenshare](src/images/Screenshare.png "Screenshare")
+
 
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
