@@ -1,4 +1,4 @@
-# WeConnect - Think Less, Connect More! :video_camera:
+# [WeConnect](https://weeconnect.netlify.app/) - Think Less, Connect More! :video_camera:
 _MICROSOFT ENGAGE'21_
 
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
